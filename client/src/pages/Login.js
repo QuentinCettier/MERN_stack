@@ -2,38 +2,41 @@ import React, { Component } from 'react'
 
 class Home extends Component {
 
-  state = {
-    user : null
-  }
-  componentWillMount() {
-    this.callApi()
-  }
+    state = {
+        response: '',
+        username: '',
+        password: '',
+        responseToPost: '',
+        auth: false,
+    };
 
-  callApi = async () => {
-        const response = await fetch('/api/user/about', {
+    handleSubmit = async e => {
+        e.preventDefault();
+        const response = await fetch('/api/auth/login', {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json',
             },
+            body: JSON.stringify({ 
+              username: this.state.username,
+              password: this.state.password
+            }),
         })
         .then(response => response.json())
-        .then(res => {
-          this.setState({user: res.data.username})
+        .then(data => {
+            console.log(data)
         })
-        
-        
+        if(this.state.auth) {
+            this.props.history.replace('/about');
+        }
     };
-
   render() {
+      
+    
     return (
-      <div className="App">
-        <h1>Stack MERN</h1>
-        <h2>Bonjour {this.state.user}</h2>
-
-
-        
+        <div className="home-container">
+        <h1>Login</h1>
         <form onSubmit={this.handleSubmit}>
-          <h3>Add Friend +  +</h3>
           <input
             className="username__input"
             type="text"
@@ -50,6 +53,8 @@ class Home extends Component {
           />
           <button type="submit">Submit</button>
         </form>
+        <p>{this.state.responseToPost}</p>
+
       </div>
 
     )

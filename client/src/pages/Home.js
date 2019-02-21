@@ -3,79 +3,176 @@ import logo from './../logo.svg'
 import io from 'socket.io-client';
 
 class Home extends Component {
-  
-    state = {
-        response: '',
-        post: '',
-        responseToPost: '',
-    };
+  constructor(props) {
+    super(props)
 
-    componentWillMount = () => {
-      const socket = io('http://localhost:3002')
+    this.state = {
+      response: '',
+      username: '',
+      password: '',
+      to: '',
+      responseToPost: '',
+      auth: false,
+      message: '',
+      messages: [],
+      private_message: '',
+      private_messages: [],
+    };
+    this.socket = io('http://localhost:3002')
+
+    this.socket.emit('username', "quentin")
+    //Public chat
+    this.socket.on('receive_message', function(data){
+      addMessage(data);
+    });
+
+    const addMessage = data => {
+      this.setState({ messages: [...this.state.messages, data]})
+    }
+
+    this.sendMessage = e => {
+      e.preventDefault()
+      this.socket.emit('send_message', {
+        author: this.state.username,
+        message: this.state.message
+      })
+      this.setState({message: ''})
+    }
+
+    //Private chat
+    this.socket.on('receive_private_message', function(data){
+      addPrivateMessage(data);
+    });
+    
+
+    const addPrivateMessage = data => {
+      this.setState({ private_messages: [...this.state.private_messages, data]})
+    }
+
+    this.sendPrivateMessage = e => {
+      e.preventDefault()
+      this.socket.emit('send_private_message', {
+        author: this.state.username,
+        private_message: this.state.private_message
+      })
     }
     
-    componentDidMount() {
 
+    
+
+  }
+    
+
+    componentWillMount = () => {
       
-
-      this.callApi()
-          .then(res => this.setState({ response: res.express }))
-          .catch(err => console.log(err));
+  
+      
     }
+    
+    // componentDidMount() {
 
-    callApi = async () => {
-        const response = await fetch('/api/hello')
-        const body = await response.json();
-        if (response.status !== 200) throw Error(body.message);
-        return body;
-    };
+    //   this.callApi()
+    // }
+
+    // callApi = async () => {
+    //     const response = await fetch('/api/verifyToken', {
+    //       method: 'POST',
+    //       headers: {
+    //       'Content-Type': 'application/json',
+    //       },
+    //     })
+    //     // const body = await response.json();
+    //     // if (response.status !== 200) throw Error(body.message);
+    //     // return body;
+    // };
 
     handleSubmit = async e => {
         e.preventDefault();
-        const response = await fetch('/api/world', {
+        const response = await fetch('/api/auth/register', {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ post: this.state.post }),
-    });
-    const body = await response.text();
-    this.setState({ responseToPost: body });
+            body: JSON.stringify({ 
+              username: this.state.username,
+              password: this.state.password
+            }),
+      })
+        .then(response => response.json())
+        .then(data => {
+          this.setState({auth : data.data.registered})
+        })
+        if(this.state.auth) {
+          this.props.history.replace('/login');
+        }
+    
     };
 
   render() {
+    
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+      <div className="home-container">
+        {/* <form onSubmit={this.handleSubmit}>
           <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-
-        <p>{this.state.response}</p>
-        <form onSubmit={this.handleSubmit}>
-          <p>
-            <strong>Post to Server:</strong>
+            <strong>Register</strong>
           </p>
           <input
+            className="username__input"
             type="text"
+            name="username"
             value={this.state.post}
-            onChange={e => this.setState({ post: e.target.value })}
+            onChange={e => this.setState({ username: e.target.value })}
+          />
+          <input
+            className="password__input"
+            type="password"
+            name="password"
+            value={this.state.password}
+            onChange={e => this.setState({ password: e.target.value })}
           />
           <button type="submit">Submit</button>
         </form>
-        <p>{this.state.responseToPost}</p>
+        <p>{this.state.responseToPost}</p> */}
 
+        <div className="public_messages">
+          <h2>public chat</h2>
+            {
+              this.state.messages.map((message, key) => {
+                return (
+                    <div key={key}>{message.author}: {message.message}</div>
+                )
+              }
+            )}
+        </div>
+
+        <div className="footer">
+            <input type="text" placeholder="Username" value={this.state.username} onChange={ev => this.setState({username: ev.target.value})} className="form-control"/>
+            <br/>
+            <input type="text" placeholder="Message" className="form-control" value={this.state.message} onChange={ev => this.setState({message: ev.target.value})}/>
+            <br/>
+            <button onClick={this.sendMessage} className="btn btn-primary form-control">Send</button>
+        </div>
+
+        <div className="private_messages">
+          <h2>private chat with {}</h2>
+            {
+              this.state.private_messages.map((message, key) => {
+                return (
+                    <div key={key}>{message.author}: {message.private_message}</div>
+                )
+              }
+            )}
+        </div>
+
+        <div className="footer">
+            <input type="text" placeholder="Username" value={this.state.username} onChange={ev => this.setState({username: ev.target.value})} className="form-control"/>
+            <br/>
+            <input type="text" placeholder="Message" className="form-control" value={this.state.private_message} onChange={ev => this.setState({private_message: ev.target.value})}/>
+            <br/>
+            <button onClick={this.sendPrivateMessage} className="btn btn-primary form-control">Send</button>
+        </div>
       </div>
+
 
     )
   }

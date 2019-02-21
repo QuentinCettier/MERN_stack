@@ -2,8 +2,8 @@
 Imports
 */
     // Nodejs
-    const { Router } = require('express');
-    
+        const { Router } = require('express');
+        const passport = require('passport');
         // Inner
         const AuthRouterClass = require('./auth/auth.routes');
         const FrontRouterClass = require('./front/front.routes');
@@ -11,6 +11,15 @@ Imports
         const UserRouterClass = require('./user/user.routes');
     //
     
+    /* 
+    Passport Strategy
+    Passport est un module NPM qui permet de sécuriser les connexions utilisateur grâce à des stratégies spécifiques. Nous utilisons ici la startégie JWT (cf. setAuthentication)
+    */
+        
+        const { setAuthentication } = require('./../services/auth.serv');
+        setAuthentication(passport);
+    //
+
     /* 
     Definition des router
     */  
@@ -22,7 +31,7 @@ Imports
         const authRouter = new AuthRouterClass();
         const frontRouter = new FrontRouterClass();
         const postRouter = new PostRouterClass();
-        const userRouter = new UserRouterClass();
+        const userRouter = new UserRouterClass({ passport });
     //
     
     /* 

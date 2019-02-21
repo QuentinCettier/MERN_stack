@@ -14,28 +14,31 @@ Import & config
 Definition
 */
     class UserRouterClass {
-        constructor(){}
-
+        constructor({ passport }){
+            this.passport = passport
+        }
         routes(){
             // Create
-            userRouter.post( '/', (req, res) => {
-
-                // Error: no body present
-                if (typeof req.body === 'undefined' || req.body === null) { 
-                    return res.json( { msg: 'No body data provided', data: null } )
-                }
+            userRouter.post( '/about', this.passport.authenticate('jwt', {session: false}), (req, res) => {
+                console.log('youhou : '+ req.user)
                 
-                // Check fields in the body
-                const { ok, extra, miss } = checkFields( [ 'name', 'email', 'password' ], req.body )
+                return res.json({msg: 'access granted', data: req.user})
+                // // Error: no body present
+                // if (typeof req.body === 'undefined' || req.body === null) { 
+                //     return res.json( { msg: 'No body data provided', data: null } )
+                // }
+                
+                // // Check fields in the body
+                // const { ok, extra, miss } = checkFields( [ 'name', 'email', 'password' ], req.body )
 
-                //=> Error: bad fields provided
-                if( !ok ) res.json( { msg: 'Bad fields provided', data: { miss: miss, extra: extra } } )
-                else{
-                    // Register new user
-                    createItem(req.body)
-                    .then( apiResponse => res.json( { msg: 'User created', data: apiResponse } ) )
-                    .catch(apiResponse => res.json( { msg: 'User not created', data: apiResponse } ) );
-                }
+                // //=> Error: bad fields provided
+                // if( !ok ) res.json( { msg: 'Bad fields provided', data: { miss: miss, extra: extra } } )
+                // else{
+                //     // Register new user
+                //     createItem(req.body)
+                //     .then( apiResponse => res.json( { msg: 'User created', data: apiResponse } ) )
+                //     .catch(apiResponse => res.json( { msg: 'User not created', data: apiResponse } ) );
+                // }
             })
 
             // Read

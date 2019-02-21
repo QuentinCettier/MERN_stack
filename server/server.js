@@ -21,9 +21,17 @@ Import
     const mainRouter = require('./routes/main.router');
 
     const Socket = require('./controllers/SocketController')
+    
+    const passport = require('passport')
+    
+    const LocalStrategy = require('passport-local').Strategy
 
+    const React = require('react')
+    const ReactDOMServer = require('react-dom/server')
+    const { StaticRouter } = require('react-router')
     
-    
+    const { createServer } = require('http')
+
 //
 
 /* 
@@ -42,17 +50,6 @@ Configuration
      * Create Socket
      */
     const io = new Socket(app)
-    
-    
-    // const socketIo = require('socket.io')
-
-    // const io = socketIo(app)
-
-    // io.on('connection', function(socket){
-    //     console.log('a user connected');
-    // });
-      
-    
 
     //=> Configurer le server
     class ServerClass {
@@ -77,6 +74,9 @@ Configuration
                 next();
               });
 
+            server.get('./about', (req, res) => {
+                
+            })
             server.get('/api/hello', (req, res) => {
                 res.send({ response: "I am alive" }).status(200)
             });
@@ -85,14 +85,17 @@ Configuration
                 res.send(
                   `I received your POST request. This is what you sent me: ${req.body.post}`,
                 );
-              });
+            });
+
             //=> Cookie-parser
             server.use(cookieParser());
             
             //=> Router
             server.use('/', mainRouter);
 
-            
+            //=> Passport
+            server.use(passport.initialize())
+            server.use(passport.session())
             
             //=> Lancer le server
             this.launch();
@@ -105,7 +108,7 @@ Configuration
                 // Start server
                 app.listen( port, () => {
                     console.log({
-                        monngo: `BDD is connected ${db}!`,
+                        monngo: `BDD is connected ${db} !`,
                         server: `Server listening on port ${port}!`
                     });
                 });

@@ -3,7 +3,10 @@ Import
 */
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const ObjectId = require('mongodb').ObjectID;
+
 //
 
 
@@ -11,10 +14,11 @@ const jwt = require('jsonwebtoken');
 Config
 */
 const userSchema = new Schema({
-    email: String,
+    username: String,
     password: String,
-    name: String
 }); 
+
+
 
 // Méthode
 userSchema.methods.generateJwt = () => {
@@ -25,18 +29,41 @@ userSchema.methods.generateJwt = () => {
     // JWT creation
     return jwt.sign({
         _id: this._id,
+        username: this.username,
         password: this.password,
-        email: this.email,
         expireIn: '10s',
         exp: parseInt(expiry.getTime() / 100, 10)
     }, process.env.JWT_SECRET);
 };
-//
-
 
 /* 
 Export
 */
-const UserModel = mongoose.model('user', userSchema);
-module.exports = UserModel;
-//
+const UserModel = module.exports = mongoose.model('user', userSchema);
+
+/**
+ * Methods
+ */
+module.exports.createUser = (newUser, callback) => {
+    bcrypt.genSalt(10, function (err, salt) {
+        if (err) {
+          console.log('err')
+        }
+        bcrypt.hash(newUser.password, salt, (err, hash) => {
+          if (err) {
+            console.log('errors')
+          }
+          newUser.password = hash
+          newUser.save(callback)
+        })
+      })
+}
+
+module.exports.comparePassword = (candidatePassword, hash, callback) => {
+    bcrypt.compare(candidatePassword, hash, function (err, isMatch) {
+      if (err) {
+        throw err
+      }
+      callback(null, isMatch)
+    })
+  }

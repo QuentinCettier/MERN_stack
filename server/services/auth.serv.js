@@ -2,6 +2,7 @@
 Imports
 */
 const JwtStrategy = require('passport-jwt').Strategy;
+const ExtractJwt = require('passport-jwt').ExtractJwt;
 const UserModel = require('../models/user.model');
 //
 
@@ -12,6 +13,7 @@ Service definition
 const cookieExtractor = (req) => {
     let token = null;
     if (req && req.cookies) token = req.cookies['hetic-blog'];
+    console.log(req.cookies['hetic-blog'])
     return token;
 };
 
@@ -22,13 +24,16 @@ const authJwt = (passport) => {
         jwtFromRequest: cookieExtractor,
         secretOrKey: process.env.JWT_SECRET,
     };
-
+    // console.log(opts)
     // #JWT strategy
-    passport.use( new JwtStrategy( opts, ( payload, done ) => {
+    passport.use( new JwtStrategy( opts, ( jwt_payload, done ) => {
         // Try to connect user
-        UserModel.findOne( { _id: payload._id }, (err, user) => {
+        console.log(jwt_payload)
+        UserModel.findOne( {_id: jwt_payload._id }, (err, user) => {
             if(err) done(err, false);
-            if(user) done(null, user)
+            if(user) {
+                done(null, user)
+            }
             else done(null, false)
         })
     }));
