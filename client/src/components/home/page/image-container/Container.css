@@ -1,0 +1,9 @@
+.Container
+{
+    display: flex;
+    width: 1064px;
+    height: 774px;
+    position: absolute;
+    left: calc(100% - 668px);
+    top: 0;
+}

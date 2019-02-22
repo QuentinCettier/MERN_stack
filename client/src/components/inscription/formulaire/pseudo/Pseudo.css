@@ -1,0 +1,22 @@
+.Pseudo
+{
+    width: 520px;
+    height: 36px;
+    padding-left: 40px;
+    border-radius: 28px;
+    background-color: #FFFFFF;
+   
+    display: flex;
+    justify-content: center;
+
+    font-family: 'Poppins';
+    font-size: 16px;
+    border: 0px;
+
+}
+
+.Pseudo::placeholder
+{
+    color: #FF572F;
+    padding-left: 10px;
+}

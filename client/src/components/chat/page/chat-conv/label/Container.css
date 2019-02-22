@@ -1,0 +1,17 @@
+.sendLabel{
+    text-align: left;
+    padding-left: 20px;
+    display: flex;
+    align-items: center; 
+    padding-top: 10px;
+}
+.sendLabel input{
+    border: none;
+    width: 90%;
+    font-size: 14px;
+}
+.sendLabel button{
+    border: none;
+    width: 15px;
+
+}

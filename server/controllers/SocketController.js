@@ -19,6 +19,7 @@ class SocketController {
                 })
                 console.log(connectedUsers)
                 console.log("=======")
+                
             })
 
             socket.on('disconnect', () => {
@@ -38,8 +39,27 @@ class SocketController {
             })
 
             socket.on('send_private_message', (data) => {
-                socket.join(`${[connectedUsers[1].id]}`)
-                io.in(`${[connectedUsers[1].id]}`).emit('receive_private_message', data)
+                // console.log(data.to)
+                // console.log(data.author)
+                let toSocket
+                let fromSocket
+                for(const user of connectedUsers) {
+                    if(user.user === data.to) {
+                        console.log('mdr')
+                        toSocket = user.id
+                    }
+                    if(user.user === data.author) {
+                        console.log('eee')
+                        fromSocket = user.id
+                    }
+                }
+                const sortArray = [toSocket, fromSocket]
+                
+                sortArray.sort()
+                let sortArrayFinal = sortArray[0].concat(sortArray[1])
+                
+                socket.join(`${sortArrayFinal}`)
+                io.in(`${sortArrayFinal}`).emit('receive_private_message', data)
                 // socket.to(`${[connectedUsers[0].id]}`).emit('receive_private_message', data)
             })
 

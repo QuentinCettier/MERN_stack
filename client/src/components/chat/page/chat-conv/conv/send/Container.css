@@ -1,0 +1,21 @@
+.sendMessage{
+    background: #FF572F;
+    border-radius: 20px;
+    width:fit-content;
+    height:fit-content;
+    margin-right: 20px;
+    padding: 5px 15px;
+    color: #ffffff;
+    font-size:15px;
+    word-wrap: break-word;
+    max-width: 50%; 
+    text-align: left;
+    
+    
+}
+.sendContainer{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0.5%;
+  
+}

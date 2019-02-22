@@ -1,0 +1,14 @@
+.Menu
+{
+    display: flex;
+    text-align: center;
+    width: 580px;
+    height: 24px; 
+    align-items: center;
+    margin-left: 155px;
+}
+
+.Lists
+{
+    text-decoration: none;
+}

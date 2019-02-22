@@ -9,6 +9,13 @@ import logo from './logo.svg'
 import Home from './pages/Home'
 import About from './pages/About'
 import Login from './pages/Login'
+import Register from './pages/Register'
+import PrivateMessage from './pages/PrivateMessage'
+import Inscription from './pages/Inscription'
+import Connexion from './pages/Connexion'
+import Chat from './pages/Chat'
+import AddFriend from './pages/AddFriend'
+
 import './App.css'
 
 class App extends Component {
@@ -23,6 +30,12 @@ class App extends Component {
             <Route exact path='/' component={Home}/>
             <Route exact path='/user/about' component={About}/>
             <Route exact path='/login' component={Login}/>
+            <Route exact path='/register' component={Register}/>
+            <Route exact path='/message/private/:username' component={PrivateMessage}/>
+            <Route exact path='/inscription' component={Inscription}/>
+            <Route exact path='/connexion' component={Connexion}/>
+            <Route exact path='/chat' component={Chat}/>
+            <Route exact path='/friend' component={AddFriend}/>
           </Switch>
       )} />
     </div>

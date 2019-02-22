@@ -1,0 +1,15 @@
+.friend-message
+{
+    width: 240px;
+    height: 23px;
+    margin-left: 10px;
+    margin-top: 6px;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    line-height: normal;
+    font-size: 18px;
+
+    color: rgba(0, 0, 0, 0.35);
+}

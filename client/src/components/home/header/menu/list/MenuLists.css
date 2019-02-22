@@ -1,0 +1,14 @@
+.Lists
+{
+    text-align: left;
+    color: white;
+    width: 140px;
+    height: 24px; 
+    font-family: 'Poppins';
+    font-size: 16px;
+}
+
+.Lists:hover
+{
+    cursor: pointer;
+}

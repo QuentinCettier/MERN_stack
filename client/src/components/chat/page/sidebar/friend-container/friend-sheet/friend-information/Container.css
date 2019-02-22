@@ -1,0 +1,11 @@
+.friend-information
+{
+    width: 260px;
+    height: 60px;
+    margin-left:10px;
+    text-align: left;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+

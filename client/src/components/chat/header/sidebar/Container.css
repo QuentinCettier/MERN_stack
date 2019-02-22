@@ -1,0 +1,10 @@
+.sidebar-header
+{
+    width: 25%;
+    height: 60px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    
+    border-bottom: solid 1px #444444;
+}

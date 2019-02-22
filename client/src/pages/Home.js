@@ -1,4 +1,8 @@
 import React, { Component } from 'react'
+import Header from '../components/home/header/Header';
+import Container from '../components/home/page/image-container/Container';
+import TextContainer from '../components/home/page/explication-container/TextContainer';
+
 import logo from './../logo.svg'
 import io from 'socket.io-client';
 
@@ -56,126 +60,21 @@ class Home extends Component {
         private_message: this.state.private_message
       })
     }
-    
-
-    
 
   }
-    
-
-    componentWillMount = () => {
-      
   
-      
+    render() {
+      const {title} = this.props
+      return (
+  
+        <div className="AppOrange">
+              <Header></Header>
+              <TextContainer></TextContainer>
+              <Container></Container>
+        </div>
+  
+      )
     }
-    
-    // componentDidMount() {
-
-    //   this.callApi()
-    // }
-
-    // callApi = async () => {
-    //     const response = await fetch('/api/verifyToken', {
-    //       method: 'POST',
-    //       headers: {
-    //       'Content-Type': 'application/json',
-    //       },
-    //     })
-    //     // const body = await response.json();
-    //     // if (response.status !== 200) throw Error(body.message);
-    //     // return body;
-    // };
-
-    handleSubmit = async e => {
-        e.preventDefault();
-        const response = await fetch('/api/auth/register', {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ 
-              username: this.state.username,
-              password: this.state.password
-            }),
-      })
-        .then(response => response.json())
-        .then(data => {
-          this.setState({auth : data.data.registered})
-        })
-        if(this.state.auth) {
-          this.props.history.replace('/login');
-        }
-    
-    };
-
-  render() {
-    
-    return (
-      <div className="home-container">
-        {/* <form onSubmit={this.handleSubmit}>
-          <p>
-            <strong>Register</strong>
-          </p>
-          <input
-            className="username__input"
-            type="text"
-            name="username"
-            value={this.state.post}
-            onChange={e => this.setState({ username: e.target.value })}
-          />
-          <input
-            className="password__input"
-            type="password"
-            name="password"
-            value={this.state.password}
-            onChange={e => this.setState({ password: e.target.value })}
-          />
-          <button type="submit">Submit</button>
-        </form>
-        <p>{this.state.responseToPost}</p> */}
-
-        <div className="public_messages">
-          <h2>public chat</h2>
-            {
-              this.state.messages.map((message, key) => {
-                return (
-                    <div key={key}>{message.author}: {message.message}</div>
-                )
-              }
-            )}
-        </div>
-
-        <div className="footer">
-            <input type="text" placeholder="Username" value={this.state.username} onChange={ev => this.setState({username: ev.target.value})} className="form-control"/>
-            <br/>
-            <input type="text" placeholder="Message" className="form-control" value={this.state.message} onChange={ev => this.setState({message: ev.target.value})}/>
-            <br/>
-            <button onClick={this.sendMessage} className="btn btn-primary form-control">Send</button>
-        </div>
-
-        <div className="private_messages">
-          <h2>private chat with {}</h2>
-            {
-              this.state.private_messages.map((message, key) => {
-                return (
-                    <div key={key}>{message.author}: {message.private_message}</div>
-                )
-              }
-            )}
-        </div>
-
-        <div className="footer">
-            <input type="text" placeholder="Username" value={this.state.username} onChange={ev => this.setState({username: ev.target.value})} className="form-control"/>
-            <br/>
-            <input type="text" placeholder="Message" className="form-control" value={this.state.private_message} onChange={ev => this.setState({private_message: ev.target.value})}/>
-            <br/>
-            <button onClick={this.sendPrivateMessage} className="btn btn-primary form-control">Send</button>
-        </div>
-      </div>
-
-
-    )
-  }
 }
 
 export default Home;

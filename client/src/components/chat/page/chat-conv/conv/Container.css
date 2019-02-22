@@ -1,0 +1,7 @@
+.Conv{
+    width: 100%;
+    overflow-y: scroll;
+    height:800px;
+    border-bottom: solid 1px #444444;
+    
+}

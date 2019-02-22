@@ -6,8 +6,8 @@ class Home extends Component {
         response: '',
         username: '',
         password: '',
-        responseToPost: '',
         auth: false,
+        responseToPost: ''
     };
 
     handleSubmit = async e => {
@@ -24,11 +24,15 @@ class Home extends Component {
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data)
+            this.setState({auth: data.data.auth})
+            
         })
-        if(this.state.auth) {
-            this.props.history.replace('/about');
-        }
+        .then(() => {
+            if(this.state.auth) {
+                this.props.history.replace('/user/about');
+            }
+        })
+        
     };
   render() {
       

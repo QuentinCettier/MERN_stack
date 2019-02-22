@@ -24,7 +24,7 @@ Definition
 
             
             authRouter.post( '/register', (req, res) => {
-
+                console.log('mdr')
                 if(typeof req.body === 'undefined' || req.body === null) {
                     return res.json( { msg : 'No body provided', data: null} )
                 }
@@ -56,7 +56,7 @@ Definition
                     
                     // Register new user
                     login(req.body, res)
-                    .then( apiResponse => res.json( { msg: 'User logged', data: apiResponse } ) )
+                    .then( apiResponse => res.json( { msg: 'User logged', data: {api: apiResponse, auth: true} } ) )
                     .catch(apiResponse => res.json( { msg: 'User not logged', data: apiResponse } ) );    
                 }
             })

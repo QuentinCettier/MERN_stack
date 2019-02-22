@@ -1,0 +1,8 @@
+.groupe-menu-sidebar
+{
+    width: 50%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    background: #FF9C85;
+}

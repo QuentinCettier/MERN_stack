@@ -13,7 +13,6 @@ Service definition
 const cookieExtractor = (req) => {
     let token = null;
     if (req && req.cookies) token = req.cookies['hetic-blog'];
-    console.log(req.cookies['hetic-blog'])
     return token;
 };
 
@@ -28,7 +27,6 @@ const authJwt = (passport) => {
     // #JWT strategy
     passport.use( new JwtStrategy( opts, ( jwt_payload, done ) => {
         // Try to connect user
-        console.log(jwt_payload)
         UserModel.findOne( {_id: jwt_payload._id }, (err, user) => {
             if(err) done(err, false);
             if(user) {

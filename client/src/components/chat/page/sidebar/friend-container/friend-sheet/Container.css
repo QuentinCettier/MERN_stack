@@ -1,0 +1,24 @@
+.friend-sheet
+{
+    width: 90%;
+    height: 80px;
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.friend-sheet-hover
+{
+    width: 100%;
+    height: 80px;
+    margin-right: 20px;
+    margin-left: 0px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background: rgba(255, 87, 47, 0.35);
+}

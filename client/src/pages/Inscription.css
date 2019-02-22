@@ -1,0 +1,51 @@
+.Inscription-title
+{
+    width: 520px;
+    height: 192px;
+    margin-top: 32px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    line-height: 88px;
+    font-size: 72px;
+    letter-spacing: 0.313043px;
+    color: #FFFFFF;
+    text-align: left;
+}
+
+.Inscription-container
+{
+    width: 720px;
+    height: 600px;
+    margin-left: 120px;
+    margin-top: 80px;
+}
+
+.Try
+{
+    width: 140px;
+    height: 56px;
+    margin-top: 102px;
+    border-radius: 28px;
+    background: #FFFFFF;
+   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: #FF572F;
+
+
+    margin-bottom: 0em;
+}
+
+.Try-text
+{
+    width: 87px;
+    height: 23px;
+    font-size: 16px;
+    
+}
+.Try-text:hover {
+    cursor: pointer;
+}

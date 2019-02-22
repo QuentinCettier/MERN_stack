@@ -1,0 +1,9 @@
+.Chat
+{
+    background-image: url('../../../../../images/Chat.svg');
+    position: absolute;
+    width: 548px;
+    height: 459px;
+    margin-left: 0;
+    margin-top: 112px;
+}

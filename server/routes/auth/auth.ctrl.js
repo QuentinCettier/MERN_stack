@@ -7,6 +7,7 @@ Imports
     
     // Inner
     const UserModel = require('../../models/user.model');
+    const RelationModel = require('./../../models/relation.model')
 //
 
 
@@ -17,8 +18,16 @@ Méthodes CRUD
         return new Promise( (resolve, reject) => {
             const newUser = new UserModel({username: body.username, password: body.password})
             UserModel.createUser(newUser, (error, user) => {
+                
                 if(error) reject(error)
-                else return resolve(user)
+                else {
+                    const relation = new RelationModel({
+                        user: user.id,
+                        friends: []
+                    })
+                    relation.save()
+                    return resolve(user)
+                }
             })
         });
     };
@@ -34,8 +43,6 @@ Méthodes CRUD
                     const validPassword = bcrypt.compareSync(body.password, user.password);
                     if( !validPassword ) reject('Password not valid')
                     else{
-                        console.log(user._id)
-                        console.log(user.username)
                         const expiry = new Date();
                         expiry.setDate(expiry.getDate() + 59);
                         

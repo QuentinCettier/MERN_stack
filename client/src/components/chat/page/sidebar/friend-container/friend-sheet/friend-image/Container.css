@@ -1,0 +1,16 @@
+.friend-image
+{
+    width: 60px;
+    height: 60px;
+    background: #C4C4C4C4;
+    border-radius: 40px;
+}
+
+.friend-image-hover
+{
+    width: 60px;
+    height: 60px;
+    margin-left: 20px;
+    background: #C4C4C4C4;
+    border-radius: 40px;
+}
