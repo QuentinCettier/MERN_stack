@@ -39,8 +39,8 @@ class SocketController {
             })
 
             socket.on('send_private_message', (data) => {
-                // console.log(data.to)
-                // console.log(data.author)
+                console.log(data.to)
+                console.log(data.author)
                 let toSocket
                 let fromSocket
                 for(const user of connectedUsers) {

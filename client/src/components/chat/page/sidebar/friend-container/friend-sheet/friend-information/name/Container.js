@@ -8,7 +8,7 @@ const FriendName = (PassedComponent) => {
         render(){
             return (
                 <div className="friend-name">
-                    <NavLink to={`/message/private/${this.props.name}`}>
+                    <NavLink to={`/chat/private/${this.props.name}`}>
                         <PassedComponent {...this.props}/>
                     </NavLink>
                 </div>

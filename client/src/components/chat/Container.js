@@ -9,7 +9,7 @@ class ChatContainer extends Component {
         super(props)
 
         this.state = {
-         
+          to: window.location.pathname.split('/')[3],
         }
     }
 
@@ -18,7 +18,7 @@ class ChatContainer extends Component {
     return (
 
       <div className="App">
-            <Header></Header>
+            <Header user={this.props.user} to={this.state.to}></Header>
             <PageChat user={this.props.user} friends={this.props.friends}></PageChat>
       </div>
 

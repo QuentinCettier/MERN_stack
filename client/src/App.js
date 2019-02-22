@@ -14,6 +14,8 @@ import PrivateMessage from './pages/PrivateMessage'
 import Inscription from './pages/Inscription'
 import Connexion from './pages/Connexion'
 import Chat from './pages/Chat'
+import ChatPrivate from './pages/ChatPrivate'
+
 import AddFriend from './pages/AddFriend'
 
 import './App.css'
@@ -31,7 +33,7 @@ class App extends Component {
             <Route exact path='/user/about' component={About}/>
             <Route exact path='/login' component={Login}/>
             <Route exact path='/register' component={Register}/>
-            <Route exact path='/message/private/:username' component={PrivateMessage}/>
+            <Route exact path='/chat/private/:username' component={ChatPrivate}/>
             <Route exact path='/inscription' component={Inscription}/>
             <Route exact path='/connexion' component={Connexion}/>
             <Route exact path='/chat' component={Chat}/>

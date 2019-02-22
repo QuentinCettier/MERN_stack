@@ -8,7 +8,7 @@ class Conv extends Component {
     render(){
         return (
             <div className="Conv">
-                 <ReceivedMessage />
+                 {/* <ReceivedMessage />
                  <SendMessage />
                  <ReceivedMessage />
                  <SendMessage />
@@ -26,7 +26,7 @@ class Conv extends Component {
                  <ReceivedMessage />
                  <ReceivedMessage />
                  <SendMessage />
-                 <ReceivedMessage />
+                 <ReceivedMessage /> */}
             </div>
         )
     }

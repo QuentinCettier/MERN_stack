@@ -9,7 +9,7 @@ class Header extends Component {
         return (
             <div className="Header">
                 <Sidebar></Sidebar>
-                <ChatNameBar></ChatNameBar>
+                <ChatNameBar user={this.props.user} to={this.props.to}></ChatNameBar>
             </div>
         )
     }

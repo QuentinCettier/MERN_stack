@@ -6,7 +6,7 @@ render(){
 
     return(
         <div className="sendContainer">
-        <div className="sendMessage">sendMendMessageTexteessageTextsendMendMessageTexteessageTextsendMendMessageTexteessageTextsendMendMessageTexteessageText</div>
+        <div className="sendMessage">{this.props.text}</div>
         </div>
     )
 

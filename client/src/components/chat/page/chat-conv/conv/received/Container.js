@@ -6,7 +6,7 @@ render(){
 
     return(
         <div className="receivedContainer">
-        <div className="receivedMessage">receivedMessagetext</div>
+        <div className="receivedMessage">{this.props.text}</div>
         </div>
     )
 

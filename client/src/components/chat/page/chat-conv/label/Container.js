@@ -6,11 +6,11 @@ import sendImage from "./../../../../../images/Polygon.png";
 class SendLabel extends Component {
     render(){
         return (
-            <div className="sendLabel">
+            <form className="sendLabel">
                 <input type="text" placeholder="Ecrivez votre message ici ..."></input>
                 <button type="submit"><img src={sendImage}/></button>
                 
-            </div>
+            </form>
         )
     }
 }
