@@ -56,6 +56,7 @@ class Inscription extends Component {
                         className="Pseudo"
                         type="text"
                         name="username"
+                        placeholder="username"
                         value={this.state.post}
                         onChange={e => this.setState({ username: e.target.value })}
                     />
@@ -63,6 +64,7 @@ class Inscription extends Component {
                         className="Mdp-inscription"
                         type="password"
                         name="password"
+                        placeholder="mot de passe"
                         value={this.state.password}
                         onChange={e => this.setState({ password: e.target.value })}
                     />

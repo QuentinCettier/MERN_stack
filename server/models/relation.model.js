@@ -41,10 +41,9 @@ module.exports.addFriend = async (userRequest,userToAdd) => {
                     // RelationModel.getFriendArray(user_2)
                     RelationModel.findOne({user: user_2.id}, (err, relation) => {
                         if(relation) {
-                            console.log(relation)
                             relation.friends.push(user_1.id)
                             relation.save()
-                            console.log(relation)
+                            
                         }
                     })                    
                 }

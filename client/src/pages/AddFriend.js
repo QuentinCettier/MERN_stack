@@ -31,6 +31,7 @@ class AddFriend extends Component {
           console.log(this.state.friends)
           console.log(this.state.user)
         })  
+        
     };
 
     handleSubmit = async () => {
@@ -44,6 +45,7 @@ class AddFriend extends Component {
               user: this.state.user
           })
       })
+      .then( this.props.history.replace('/chat') )
     }
 
   render() {
